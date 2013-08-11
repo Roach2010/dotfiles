@@ -38,6 +38,15 @@ alias pacmir='sudo pacman -Syy'                # Force refresh of all package li
 
 #alias pacman='pacman-color'
 
+sshkey() {
+   eval `ssh-agent`
+   ssh-add
+}
+
+cache() {
+   watch -n .5 ccache -s
+}
+
 prefix() {
    export WINEPREFIX="$HOME/.local/share/wineprefixes/$1"
 }
