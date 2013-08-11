@@ -1,0 +1,30 @@
+#!/bin/bash
+
+bold=`tput bold`
+normal=`tput sgr0`
+
+setversion ()
+{
+  rm /usr/bin/python
+  ln -s "/usr/bin/python$VERSION" /usr/bin/python
+  ls -la /usr/bin/python --color
+  exit 0
+}
+
+if [ "$#" -ne 1 ]
+then
+  VERSION=2
+  echo ${bold}defaulting to version 2${normal}
+  setversion
+else
+  VERSION=$1
+fi
+
+if [ $VERSION = 2 ] || [ $VERSION = 3 ]
+then
+  echo ${bold}setting python to version $VERSION${normal}
+  setversion
+else
+  echo ${bold}Error: version number must be either 2 or 3${normal}
+  exit 1
+fi
