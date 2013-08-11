@@ -1,0 +1,93 @@
+# Conky settings #
+background no
+update_interval 1
+
+cpu_avg_samples 2
+net_avg_samples 2
+
+override_utf8_locale yes
+
+double_buffer yes
+no_buffers yes
+
+text_buffer_size 2048
+#imlib_cache_size 0
+
+#temperature_unit fahrenheit
+
+# Window specifications #
+
+own_window yes
+own_window_type override
+own_window_transparent yes
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+
+border_inner_margin 0
+border_outer_margin 0
+
+minimum_size 200 250
+maximum_width 200
+
+alignment tr
+gap_x 10
+gap_y 0
+
+# Graphics settings #
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+
+# Text settings #
+use_xft yes
+xftfont caviar dreams:bold:size=8
+xftalpha 0.5
+
+uppercase no
+
+#temperature_unit celsius
+
+default_color FFFFFF
+
+# Lua Load  #
+lua_load /home/roach/clock_rings.lua
+lua_draw_hook_pre clock_rings
+
+TEXT
+${voffset 8}${color 0066FF}${font caviar dreams:bold:size=14}${time %A}${font}${voffset -8}${alignr 55}${color FFFFFF}${font caviar dreams:bold:size=30}${time %e}${font}
+${color FFFFFF}${voffset -30}${color FFFFFF}${font caviar dreams:bold:size=16}${time %b}${font}${voffset -3} ${color FFFFFF}${font caviar dreams:bold:size=18}${time %Y}${font}${color 0066FF}${hr}
+${voffset 140} ${font caviar dreams:bold:size=10}${alignr}$USER${font}
+${image /usr/share/conky-lua-arch/arch-logo.png -p 64,100 -s 80x75}
+
+# rings: step on x: 25
+#        step on y: 50
+${color FFFFFF}${goto 19}${voffset 30}${cpu}%
+${color 0066FF}${goto 19}cpu
+#
+${color FFFFFF}${goto 44}${voffset 16}${memperc}%
+${color 0066FF}${goto 44}mem
+#
+${color FFFFFF}${goto 69}${voffset 16}${platform coretemp.0 temp 1}°C
+${color 0066FF}${goto 69}temp
+#
+#${color FFFFFF}${goto 100}${voffset 23}${fs_used_perc /}%
+#${color 0066FF}${goto 100}  Arch /
+#
+${color FFFFFF}${goto 94}${voffset 16}${downspeed eth0}
+${color FFFFFF}${goto 94}${upspeed eth0}
+${color 0066FF}${goto 94}eth0
+#${color FFFFFF}${goto 125}${voffset 25}${downspeed wlan0}
+#${color FFFFFF}${goto 125}${upspeed wlan0}
+#${color 0066FF}${goto 125}wlan0
+
+${color 0066FF}Lan: ${color white}${addr eth0}
+#${color 0066FF}WiFi ${color white}${addr wlan0}
+#${color 0066FF}PPP ${color white}${addr ppp0}
+
+${color 0066FF}ArchLinux ${goto 60}${color white} ${fs_bar 8,75 /} ${alignr}${fs_free /}${color white}
+${color 0066FF}Home      ${goto 60}${color white} ${fs_bar 8,75 /home} ${alignr}${fs_free /home}${color white}
+${color 0066FF}Android   ${goto 60}${color white} ${fs_bar 8,75 /android} ${alignr}${fs_free /android}${color white}
+${color 0066FF}Vmware    ${goto 60}${color white} ${fs_bar 8,75 /vmware} ${alignr}${fs_free /vmware}${color white}
+
+${color 0066FF}Hostname:${color white} ${nodename}
+${color 0066FF}Kernel:${color white} ${kernel}
