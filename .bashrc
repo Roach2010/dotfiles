@@ -5,20 +5,15 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias grep='grep --color=auto -nE'
-alias ls='ls --color=auto'
-eval $(dircolors -b)
 
 alias packer-color='sudo packer-color'
 alias setpython='sudo setpython'
 
 source /usr/share/git/completion/git-completion.bash
 
-PS1='[\u@\h \W]\$ '
 
 PATH=$PATH:/opt/android-sdk/platform-tools:/opt/android-sdk/tools:/home/roach/bin
 PATH=$PATH:/home/roach/ingress-apk-mod/bin:/opt/android-sdk/build-tools/17.0.0/
-
 
 # Pacman alias examples
 alias pacupg='sudo pacman -Syu'        # Synchronize with repositories before upgrading packages that are out of date on the local system.
@@ -35,8 +30,6 @@ alias paclocs='pacman -Qs'             # Search for package(s) in the local data
 alias pacupd='sudo pacman -Sy && sudo abs'     # Update and refresh the local package and ABS databases against repositories
 alias pacinsd='sudo pacman -S --asdeps'        # Install given package(s) as dependencies of another package
 alias pacmir='sudo pacman -Syy'                # Force refresh of all package lists after updating /etc/pacman.d/mirrorlist
-
-#alias pacman='pacman-color'
 
 sshkey() {
    eval `ssh-agent`
