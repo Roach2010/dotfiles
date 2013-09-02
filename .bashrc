@@ -37,7 +37,7 @@ sshkey() {
 }
 
 cache() {
-   watch -n .5 ccache -s
+   watch -n .5 --color /home/roach/bin/_ccache
 }
 
 prefix() {
