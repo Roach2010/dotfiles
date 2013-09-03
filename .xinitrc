@@ -15,5 +15,6 @@ xset +fp /usr/share/fonts/misc
 xset fp rehash
 
 # exec gnome-session
-exec startxfce4
+#exec startxfce4
 # ...or the Window Manager of your choice
+exec i3
