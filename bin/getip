@@ -1,2 +1,2 @@
-#!/usr/bin/bash
+#!/bin/bash
 ifconfig eth0 | grep "inet " | awk -F: '{print $1}' | awk '{print $2}'

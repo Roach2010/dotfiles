@@ -1,0 +1,26 @@
+#!/bin/bash
+
+bold=`tput bold`
+normal=`tput sgr0`
+
+startchroot ()
+{
+  schroot -c ubuntu-precise -u $USERNAME
+  exit 0
+}
+
+if [ "$#" -ne 1 ]
+then
+  USERNAME=roach
+  startchroot
+else
+  USERNAME=$1
+fi
+
+if [ $USERNAME = roach ] || [ $USERNAME = root ]
+then
+  startchroot
+else
+  echo ${bold}Error: invalid username specified${normal}
+  exit 1
+fi
