@@ -1,0 +1,2 @@
+#!/bin/bash
+signapk -w /home/roach/testkeys/testkey.x509.pem /home/roach/testkeys/testkey.pk8 $1 signed_$1
