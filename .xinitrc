@@ -14,6 +14,10 @@ fi
 xset +fp /usr/share/fonts/misc
 xset fp rehash
 
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+
+numlockx &
+
 # exec gnome-session
 #exec startxfce4
 # ...or the Window Manager of your choice
