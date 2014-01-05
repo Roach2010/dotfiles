@@ -10,10 +10,45 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod1
+set $mod4 Mod4
+
+# Border style for new windows
+# This option determines which border style new windows will have.
+# The default is "normal". Note that new_float applies only to windows
+# which are starting out as floating windows, e.g. dialog windows.
+# new_window <normal|1pixel|none|pixel>
+# new_float <normal|1pixel|none|pixel>
+new_window pixel 1
+
+#hide_edge_borders <none|vertical|horizontal|both>
+hide_edge_borders both
+
+# class                 border  backgr. text    indicator
+client.focused          #4c7899 #285577 #ffffff #5BAFEE
+client.focused_inactive #333333 #000000 #ffffff #484e50
+client.unfocused        #333333 #000000 #888888 #292d2e
+client.urgent           #2f343a #900000 #ffffff #900000
+
+# Changing border style
+bindsym $mod+t border normal
+bindsym $mod+y border 1pixel
+bindsym $mod+u border none
+
+# customise windows
+for_window [class="xbmc.bin"] border none
+for_window [class="Xfce4-notifyd"] floating enable
+for_window [class="Vidalia" instance="vidalia"] floating enable border normal
+for_window [class="chromium-dev" instance="^crx_"] border normal
+for_window [class="Java" instance="java" title="^Eclipse"] floating enable border none
+for_window [class="Eclipse" instance="Eclipse" title="^Progress"] floating enable
+for_window [class="Thunar" title="^File"] floating enable border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font -*-gohufont-medium-*-*-*-14-*-*-*-*-*-iso10646-*
+font pango:Terminus 9
+
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
@@ -24,11 +59,13 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 floating_modifier $mod
 
 # start a terminal
-# bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
+
+# enter standby mode
+bindsym $mod+Escape exec --no-startup-id /home/roach/bin/_standby
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run
@@ -41,7 +78,7 @@ bindsym $mod+d exec --no-startup-id j4-dmenu-desktop
 bindsym $mod+b exec bcompare
 
 # start chromium
-bindsym $mod+c exec chromium
+bindsym $mod+c exec chromium-dev
 
 # change focus
 bindsym $mod+j focus left
@@ -94,39 +131,47 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # workspace names and displays
-workspace 1:Chrome output DisplayPort-0
-workspace 2:IRC output DisplayPort-0
-workspace 3 output DisplayPort-0
-workspace 4:Dev output DisplayPort-1
-workspace 5 output DisplayPort-1
-workspace 6 output DisplayPort-1
-workspace 7 output DisplayPort-2
-workspace 8 output DisplayPort-2
-workspace 9 output DisplayPort-2
+workspace www       output DisplayPort-0
+workspace hangouts  output DisplayPort-0
+workspace irc       output DisplayPort-0
+workspace dev       output DisplayPort-1
+workspace 5         output DisplayPort-1
+workspace 6         output DisplayPort-1
+workspace diff      output DisplayPort-2
+workspace git       output DisplayPort-2
+workspace 9         output DisplayPort-2
+workspace 0         output DisplayPort-2
+
+# This configuration directive enables automatic workspace back_and_forth
+# (see [back_and_forth])when switching to the workspace that is currently focused.
+workspace_auto_back_and_forth yes
+
+# Delay urgency hint reset on workspace change
+force_display_urgency_hint 1000ms
 
 # switch to workspace
-bindsym $mod+1 workspace 1:Chrome
-bindsym $mod+2 workspace 2:IRC
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4:Dev
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-#bindsym $mod+0 workspace 10
+bindsym $mod4+1 workspace www
+bindsym $mod4+2 workspace hangouts
+bindsym $mod4+3 workspace irc
+bindsym $mod4+4 workspace dev
+bindsym $mod4+5 workspace 5
+bindsym $mod4+6 workspace 6
+bindsym $mod4+7 workspace diff
+bindsym $mod4+8 workspace git
+bindsym $mod4+9 workspace 9
+bindsym $mod4+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1:Chrome
-bindsym $mod+Shift+2 move container to workspace 2:IRC
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4:Dev
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-#bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod4+Shift+1 move container to workspace www
+bindsym $mod4+Shift+2 move container to workspace hangouts
+bindsym $mod4+Shift+3 move container to workspace irc
+bindsym $mod4+Shift+4 move container to workspace dev
+bindsym $mod4+Shift+5 move container to workspace 5
+bindsym $mod4+Shift+6 move container to workspace 6
+bindsym $mod4+Shift+7 move container to workspace diff
+bindsym $mod4+Shift+8 move container to workspace git
+bindsym $mod4+Shift+9 move container to workspace 9
+bindsym $mod4+Shift+0 move container to workspace 10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -143,16 +188,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j           resize shrink width 10 px or 10 ppt
+        bindsym k           resize grow height 10 px or 10 ppt
+        bindsym l           resize shrink height 10 px or 10 ppt
+        bindsym semicolon   resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left        resize shrink width 10 px or 10 ppt
+        bindsym Down        resize grow height 10 px or 10 ppt
+        bindsym Up          resize shrink height 10 px or 10 ppt
+        bindsym Right       resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -161,18 +206,37 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Assign Browsers to workspace 1q
+assign [class="chromium-dev" instance="^crx_"] → hangouts
+assign [class="chromium-dev"] → www
+assign [class="Firefox"] → www
+assign [class="Xchat"] → irc
+assign [class="xbmc.bin"] → dev
+assign [class="Bcompare"] → diff
+assign [class="Gitk"] → git
+
 # media and volume controls
 bindsym XF86AudioLowerVolume exec volume_ctl down
 bindsym XF86AudioRaiseVolume exec volume_ctl up
 bindsym XF86AudioMute exec volume_ctl mute
 
+# Drop-down terminal
+bindsym XF86Calculator exec "xfce4-terminal --drop-down -T Drop-down"
+for_window [class="Xfce4-terminal" title="Drop-down"] floating enable border none
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
-#        hidden_state hide
-#        modifier $mod
+        status_command    i3status
+        position          top
+
 }
+
+# Toggle between dock mode and hide mode
+bindsym $mod4+space bar mode toggle
 
 # apply display settings
 exec ~/.screenlayout/default_00_01_02.sh
+
+# set background image
+exec --no-startup-id ~/.fehbg.sh
