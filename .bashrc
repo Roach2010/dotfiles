@@ -13,7 +13,7 @@ source /usr/share/git/completion/git-completion.bash
 
 
 PATH=$PATH:/opt/android-sdk/platform-tools:/opt/android-sdk/tools:/home/roach/bin
-PATH=$PATH:/home/roach/ingress-apk-mod/bin:/opt/android-sdk/build-tools/17.0.0/
+PATH=$PATH:/home/roach/ingress-apk-mod/bin:/opt/android-sdk/build-tools/19
 
 # Pacman alias examples
 alias pacupg='sudo pacman -Syu'        # Synchronize with repositories before upgrading packages that are out of date on the local system.
